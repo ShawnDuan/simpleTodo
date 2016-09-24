@@ -4,7 +4,7 @@
 
 Submitted by: **Shawn Duan**
 
-Time spent: **0.5** hours spent in total
+Time spent: **1.5** hours spent in total
 
 ## User Stories
 
