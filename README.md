@@ -30,9 +30,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+<div>
+    <img src='https://raw.githubusercontent.com/shawnduan/simpleTodo/master/art/todolist_demo.gif' style='border: #f1f1f1 solid 1px'/>
+</div>
 
 ## Notes
 
