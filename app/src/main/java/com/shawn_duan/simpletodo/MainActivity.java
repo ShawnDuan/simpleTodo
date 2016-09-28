@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,50 +15,49 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.shawn_duan.simpletodo.models.TodoItem;
+
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
-    ArrayList<String> items;
-    ArrayAdapter<String> itemsAdapter;
-    ListView lvItems;
+    private Realm mRealm;
+    private RealmResults<TodoItem> mAllTodoItems;
+    TodoListAdapter mItemsAdapter;
+    RecyclerView rvItems;
     EditText etNewItem;
 
-    private final int REQUEST_CODE = 20;
+    public final int REQUEST_CODE = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         etNewItem = (EditText) findViewById(R.id.etNewItem);
-        lvItems = (ListView) findViewById(R.id.lvItems);
-        items = new ArrayList<>();
-        readItems();
-        itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        lvItems.setAdapter(itemsAdapter);
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+        rvItems = (RecyclerView) findViewById(R.id.rvItems);
 
-                intent.putExtra("position", position);
-                intent.putExtra("itemContent", items.get(position));
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
+        mRealm = Realm.getDefaultInstance();
+        mAllTodoItems = mRealm.where(TodoItem.class).findAll();
+        mItemsAdapter = new TodoListAdapter(MainActivity.this, mAllTodoItems, "mTimestamp");
+        rvItems.setLayoutManager(new LinearLayoutManager(this));
+        rvItems.setAdapter(mItemsAdapter);
 
-        lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                removeItem(position);
-                return true;
-            }
-        });
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+//        rvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                removeItem(position);
+//                return true;
+//            }
+//        });
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
@@ -64,50 +65,31 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             int position = data.getExtras().getInt("position");
-            String newContent = data.getExtras().getString("newContent");
-            updateItem(position, newContent);
+            long timestamp = data.getExtras().getLong("timestamp");
+            TodoItem todoItem = mRealm.where(TodoItem.class).equalTo("mTimestamp", timestamp).findFirst();
+            updateItem(position, todoItem);
         }
     }
 
     public void onAddItem(View view) {
         String itemText = etNewItem.getText().toString();
-        itemsAdapter.add(itemText);
+        TodoItem item = new TodoItem();
+        item.setTimestamp(System.currentTimeMillis());
+        item.setTitle(itemText);
+        mRealm.beginTransaction();
+        mRealm.copyToRealm(item);
+        mRealm.commitTransaction();
+
         etNewItem.setText("");
         dismissKeyboard(etNewItem);
-        writeItems();
     }
 
-    private void removeItem(int position) {
-        items.remove(position);
-        itemsAdapter.notifyDataSetChanged();
-        writeItems();
-    }
-
-    private void updateItem(int position, String content) {
-        Log.d(TAG, "position/content:" + position + "/" + content);
-        items.set(position, content);
-        itemsAdapter.notifyDataSetChanged();
-        writeItems();
-    }
-
-    private void readItems() {
-        File filesDir = getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            items = new ArrayList<>(FileUtils.readLines(todoFile));
-        } catch (IOException ex) {
-            items = new ArrayList<>();
-        }
-    }
-
-    private void writeItems() {
-        File filesDir = getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            FileUtils.writeLines(todoFile, items);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    private void updateItem(int position, TodoItem item) {
+        Log.d(TAG, "position/content:" + position + "/" + item);
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(item);
+        mRealm.commitTransaction();
+        mItemsAdapter.notifyItemChanged(position);
     }
 
     private void dismissKeyboard(View view) {

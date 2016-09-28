@@ -9,31 +9,48 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.shawn_duan.simpletodo.models.TodoItem;
+
+import io.realm.Realm;
+
 /**
  * Created by Shawn Duan on 9/22/16.
  */
 
 public class EditActivity extends AppCompatActivity {
     private final static String TAG = "EditActivity";
+
+    private Realm mRealm;
+    private EditText etItemTitle;
     private EditText etItemContent;
+
     private Button btSave;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        etItemContent = (EditText) findViewById(R.id.textContent);
-        String oldContent = getIntent().getStringExtra("itemContent");
-//        etItemContent.setText(oldContent);
-        etItemContent.append(oldContent);
+        etItemTitle = (EditText) findViewById(R.id.etTitle);
+        etItemContent = (EditText) findViewById(R.id.etContent);
+        final long itemTimestamp = getIntent().getExtras().getLong("itemTimestamp");
+
+        mRealm = Realm.getDefaultInstance();
+        final TodoItem currentItem = mRealm.where(TodoItem.class).equalTo("mTimestamp", itemTimestamp).findFirst();
+        etItemTitle.append(currentItem.getTitle());
+        etItemContent.append(currentItem.getContent());
 
         btSave = (Button) findViewById(R.id.buttonSave);
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mRealm.beginTransaction();
+                currentItem.setTitle(etItemTitle.getText().toString());
+                currentItem.setContent(etItemContent.getText().toString());
+                mRealm.copyToRealmOrUpdate(currentItem);
+                mRealm.commitTransaction();
                 Intent data = new Intent();
                 data.putExtra("position", getIntent().getIntExtra("position", 0));
-                data.putExtra("newContent", etItemContent.getText().toString());
+                data.putExtra("timestamp", itemTimestamp);
                 setResult(RESULT_OK, data);
                 EditActivity.this.finish();
             }
