@@ -43,11 +43,14 @@ public class EditActivity extends AppCompatActivity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRealm.beginTransaction();
-                currentItem.setTitle(etItemTitle.getText().toString());
-                currentItem.setContent(etItemContent.getText().toString());
-                mRealm.copyToRealmOrUpdate(currentItem);
-                mRealm.commitTransaction();
+                mRealm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        currentItem.setTitle(etItemTitle.getText().toString());
+                        currentItem.setContent(etItemContent.getText().toString());
+                        realm.copyToRealmOrUpdate(currentItem);
+                    }
+                });
                 Intent data = new Intent();
                 data.putExtra("position", getIntent().getIntExtra("position", 0));
                 data.putExtra("timestamp", itemTimestamp);

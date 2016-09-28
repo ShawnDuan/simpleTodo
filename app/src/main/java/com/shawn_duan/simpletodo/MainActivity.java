@@ -66,29 +66,34 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             int position = data.getExtras().getInt("position");
             long timestamp = data.getExtras().getLong("timestamp");
-            TodoItem todoItem = mRealm.where(TodoItem.class).equalTo("mTimestamp", timestamp).findFirst();
+            final TodoItem todoItem = mRealm.where(TodoItem.class).equalTo("mTimestamp", timestamp).findFirst();
             updateItem(position, todoItem);
         }
     }
 
     public void onAddItem(View view) {
         String itemText = etNewItem.getText().toString();
-        TodoItem item = new TodoItem();
+        final TodoItem item = new TodoItem();
         item.setTimestamp(System.currentTimeMillis());
         item.setTitle(itemText);
-        mRealm.beginTransaction();
-        mRealm.copyToRealm(item);
-        mRealm.commitTransaction();
-
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealm(item);
+            }
+        });
         etNewItem.setText("");
         dismissKeyboard(etNewItem);
     }
 
-    private void updateItem(int position, TodoItem item) {
+    private void updateItem(int position, final TodoItem item) {
         Log.d(TAG, "position/content:" + position + "/" + item);
-        mRealm.beginTransaction();
-        mRealm.copyToRealmOrUpdate(item);
-        mRealm.commitTransaction();
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(item);
+            }
+        });
         mItemsAdapter.notifyItemChanged(position);
     }
 

@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.shawn_duan.simpletodo.models.TodoItem;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -41,7 +45,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
         TextView timestamp = (TextView) holder.itemView.findViewById(R.id.itemTimestamp);
         TodoItem item = mTodoItemSet.get(position);
         title.setText(item.getTitle());
-        timestamp.setText(String.valueOf(item.getTimestamp()));
+        timestamp.setText(convertTime(item.getTimestamp()));
     }
 
     @Override
@@ -93,5 +97,11 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
                 }
             });
         }
+    }
+
+    private String convertTime(long time){
+        Date date = new Date(time);
+        Format format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return format.format(date);
     }
 }
