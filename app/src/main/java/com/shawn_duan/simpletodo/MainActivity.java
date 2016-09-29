@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.shawn_duan.simpletodo.models.TodoItem;
 
@@ -49,14 +50,6 @@ public class MainActivity extends AppCompatActivity {
         rvItems.setLayoutManager(new LinearLayoutManager(this));
         rvItems.setAdapter(mItemsAdapter);
 
-
-//        rvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                removeItem(position);
-//                return true;
-//            }
-//        });
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
@@ -73,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAddItem(View view) {
         String itemText = etNewItem.getText().toString();
+        if (itemText == null || itemText.length() == 0) {
+            Toast.makeText(MainActivity.this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
         final TodoItem item = new TodoItem();
         item.setTimestamp(System.currentTimeMillis());
         item.setTitle(itemText);

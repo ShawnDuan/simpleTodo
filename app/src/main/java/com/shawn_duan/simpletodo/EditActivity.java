@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.shawn_duan.simpletodo.models.TodoItem;
 
@@ -37,12 +38,17 @@ public class EditActivity extends AppCompatActivity {
         mRealm = Realm.getDefaultInstance();
         final TodoItem currentItem = mRealm.where(TodoItem.class).equalTo("mTimestamp", itemTimestamp).findFirst();
         etItemTitle.append(currentItem.getTitle());
-        etItemContent.append(currentItem.getContent());
+        etItemContent.append((currentItem.getContent() != null) ? currentItem.getContent() : "");
 
         btSave = (Button) findViewById(R.id.buttonSave);
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String newTitle = etItemTitle.getText().toString();
+                if (newTitle == null || newTitle.length() == 0) {
+                    Toast.makeText(EditActivity.this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 mRealm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
@@ -62,4 +68,13 @@ public class EditActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
+    @Override
+    public void onBackPressed() {
+        String newTitle = etItemTitle.getText().toString();
+        if (newTitle == null || newTitle.length() == 0) {
+            Toast.makeText(EditActivity.this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        super.onBackPressed();
+    }
 }
