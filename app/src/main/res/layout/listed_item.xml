@@ -3,31 +3,32 @@
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:background="@drawable/bg_rectangle"
-    android:padding="6dip" >
+    android:layout_marginBottom="1dp"
+    android:padding="6dp" >
 
     <TextView
         android:id="@+id/itemTitle"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:text="Empty title"
-        android:textSize="16sp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/itemTimestamp"
-        android:layout_alignParentTop="true"/>
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/itemTimestamp"
+        android:layout_toStartOf="@+id/itemTimestamp"/>
 
     <TextView
         android:id="@+id/itemTimestamp"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="right|center_vertical"
         android:ellipsize="marquee"
         android:text="Empty timestamp"
-        android:textSize="12sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:textSize="16sp"
+        android:maxLines="1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
 
 
 </RelativeLayout>
