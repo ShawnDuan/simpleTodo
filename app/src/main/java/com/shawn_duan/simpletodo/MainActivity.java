@@ -3,9 +3,12 @@ package com.shawn_duan.simpletodo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -33,22 +36,31 @@ public class MainActivity extends AppCompatActivity {
     private RealmResults<TodoItem> mAllTodoItems;
     TodoListAdapter mItemsAdapter;
     RecyclerView rvItems;
-    EditText etNewItem;
+    FloatingActionButton fabAddItem;
 
     public final int REQUEST_CODE = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        etNewItem = (EditText) findViewById(R.id.etNewItem);
-        rvItems = (RecyclerView) findViewById(R.id.rvItems);
 
         mRealm = Realm.getDefaultInstance();
         mAllTodoItems = mRealm.where(TodoItem.class).findAll();
-        mItemsAdapter = new TodoListAdapter(MainActivity.this, mAllTodoItems, "mTimestamp");
+
+        setContentView(R.layout.activity_main);
+        rvItems = (RecyclerView) findViewById(R.id.rvItems);
+        mItemsAdapter = new TodoListAdapter(MainActivity.this, mAllTodoItems, "timestamp");
         rvItems.setLayoutManager(new LinearLayoutManager(this));
         rvItems.setAdapter(mItemsAdapter);
+        fabAddItem = (FloatingActionButton) findViewById(R.id.fabAddItem);
+        fabAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                CreateItemDialogFragment createItemDialogFragment = new CreateItemDialogFragment();
+                createItemDialogFragment.show(fm, "fragment_create_todo");
+            }
+        });
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
@@ -59,28 +71,9 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             int position = data.getExtras().getInt("position");
             long timestamp = data.getExtras().getLong("timestamp");
-            final TodoItem todoItem = mRealm.where(TodoItem.class).equalTo("mTimestamp", timestamp).findFirst();
+            final TodoItem todoItem = mRealm.where(TodoItem.class).equalTo("timestamp", timestamp).findFirst();
             updateItem(position, todoItem);
         }
-    }
-
-    public void onAddItem(View view) {
-        String itemText = etNewItem.getText().toString();
-        if (itemText == null || itemText.length() == 0) {
-            Toast.makeText(MainActivity.this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        final TodoItem item = new TodoItem();
-        item.setTimestamp(System.currentTimeMillis());
-        item.setTitle(itemText);
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.copyToRealm(item);
-            }
-        });
-        etNewItem.setText("");
-        dismissKeyboard(etNewItem);
     }
 
     private void updateItem(int position, final TodoItem item) {
@@ -92,10 +85,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mItemsAdapter.notifyItemChanged(position);
-    }
-
-    private void dismissKeyboard(View view) {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

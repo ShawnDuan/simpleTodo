@@ -6,6 +6,24 @@
         <item name="colorPrimary">@color/customize_Primary</item>
         <item name="colorPrimaryDark">@color/customize_Dark</item>
         <item name="colorAccent">@color/customize_Light</item>
+        <item name="android:dialogTheme">@style/AppDialogTheme</item>
     </style>
+
+    <!-- Define your custom dialog theme here extending from base -->
+    <style name="AppDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Define color properties as desired -->
+        <item name="colorPrimary">@color/customize_Primary</item>
+        <item name="colorPrimaryDark">@color/customize_Dark</item>
+        <item name="android:textColorHighlight">@color/customize_Verylight</item>
+        <item name="colorAccent">@color/customize_Highlight</item>
+        <item name="colorControlNormal">@color/customize_Dark</item>
+        <!-- Define window properties as desired -->
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
 
 </resources>

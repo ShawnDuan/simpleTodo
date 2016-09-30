@@ -10,33 +10,51 @@ import io.realm.annotations.Required;
 
 public class TodoItem extends RealmObject {
     @PrimaryKey
-    private long mTimestamp;
+    private long timestamp;
     @Required
-    private String mTitle;
-    private String mContent;
+    private String title;
+    private String content;
+    private boolean isDone;
+    private int estimateTimeInMin;
 
     public long getTimestamp() {
-        return mTimestamp;
+        return timestamp;
     }
 
     public void setTimestamp(long timestamp) {
-        mTimestamp = timestamp;
+        this.timestamp = timestamp;
     }
 
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     public void setTitle(String title) {
-        mTitle = title;
+        this.title = title;
     }
 
     public String getContent() {
-        return mContent;
+        return content;
     }
 
     public void setContent(String content) {
-        mContent = content;
+        this.content = content;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public int getEstimateTimeInMin() {
+        return estimateTimeInMin;
+    }
+
+    public void setEstimateTimeInMin(int estimateTimeInMin) {
+        this.estimateTimeInMin = estimateTimeInMin;
     }
 
 }

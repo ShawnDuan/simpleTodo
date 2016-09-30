@@ -36,7 +36,7 @@ public class EditActivity extends AppCompatActivity {
         final long itemTimestamp = getIntent().getExtras().getLong("itemTimestamp");
 
         mRealm = Realm.getDefaultInstance();
-        final TodoItem currentItem = mRealm.where(TodoItem.class).equalTo("mTimestamp", itemTimestamp).findFirst();
+        final TodoItem currentItem = mRealm.where(TodoItem.class).equalTo("timestamp", itemTimestamp).findFirst();
         etItemTitle.append(currentItem.getTitle());
         etItemContent.append((currentItem.getContent() != null) ? currentItem.getContent() : "");
 
