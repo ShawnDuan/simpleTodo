@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements CreateOrEditItemD
         mAllTodoItems = mRealm.where(TodoItem.class).findAll();
 
         setContentView(R.layout.activity_main);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
         rvItems = (RecyclerView) findViewById(R.id.rvItems);
         mItemsAdapter = new TodoListAdapter(MainActivity.this, mAllTodoItems, "timestamp");
         rvItems.setLayoutManager(new LinearLayoutManager(this));
