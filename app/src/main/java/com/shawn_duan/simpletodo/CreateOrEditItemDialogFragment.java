@@ -24,9 +24,9 @@ import io.realm.Realm;
  * Created by sduan on 9/29/16.
  */
 
-public class CreateItemDialogFragment extends DialogFragment implements TextView.OnEditorActionListener{
+public class CreateOrEditItemDialogFragment extends DialogFragment implements TextView.OnEditorActionListener{
 
-    private final static String TAG = "CreateItemDialogFragment";
+    private final static String TAG = "CreateOrEditItemDialogFragment";
     private final static int MODE_CREATE = 0;
     private final static int MODE_EDIT = 1;
     private Realm mRealm;
@@ -38,7 +38,7 @@ public class CreateItemDialogFragment extends DialogFragment implements TextView
     private long mTimestamp;
     private int mMode;
 
-    public CreateItemDialogFragment() {
+    public CreateOrEditItemDialogFragment() {
 
     }
 
@@ -55,17 +55,17 @@ public class CreateItemDialogFragment extends DialogFragment implements TextView
         void onFinishEditDialog(int position);
     }
 
-    public static CreateItemDialogFragment newInstance() {
-        return new CreateItemDialogFragment();
+    public static CreateOrEditItemDialogFragment newInstance() {
+        return new CreateOrEditItemDialogFragment();
     }
 
-    public static CreateItemDialogFragment newInstance(int position, long timestamp) {
-        CreateItemDialogFragment createItemDialogFragment = new CreateItemDialogFragment();
+    public static CreateOrEditItemDialogFragment newInstance(int position, long timestamp) {
+        CreateOrEditItemDialogFragment createOrEditItemDialogFragment = new CreateOrEditItemDialogFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
         args.putLong("timestamp", timestamp);
-        createItemDialogFragment.setArguments(args);
-        return createItemDialogFragment;
+        createOrEditItemDialogFragment.setArguments(args);
+        return createOrEditItemDialogFragment;
     }
 
     @Override

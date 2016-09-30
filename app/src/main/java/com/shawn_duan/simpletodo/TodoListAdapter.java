@@ -76,9 +76,9 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
                     long timestamp = mTodoItemSet.get(position).getTimestamp();
 
                     FragmentManager fm = mActivity.getSupportFragmentManager();
-                    CreateItemDialogFragment createItemDialogFragment =
-                            CreateItemDialogFragment.newInstance(position, timestamp);     // edit existing todo item
-                    createItemDialogFragment.show(fm, "fragment_edit_todo");
+                    CreateOrEditItemDialogFragment createOrEditItemDialogFragment =
+                            CreateOrEditItemDialogFragment.newInstance(position, timestamp);     // edit existing todo item
+                    createOrEditItemDialogFragment.show(fm, "fragment_edit_todo");
                 }
             });
 

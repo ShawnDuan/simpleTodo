@@ -14,7 +14,7 @@ import com.shawn_duan.simpletodo.models.TodoItem;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class MainActivity extends AppCompatActivity implements CreateItemDialogFragment.EditNameDialogListener {
+public class MainActivity extends AppCompatActivity implements CreateOrEditItemDialogFragment.EditNameDialogListener {
     private final static String TAG = "MainActivity";
     private Realm mRealm;
     private RealmResults<TodoItem> mAllTodoItems;
@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements CreateItemDialogF
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getSupportFragmentManager();
-                CreateItemDialogFragment createItemDialogFragment = CreateItemDialogFragment.newInstance();     // new todo item
-                createItemDialogFragment.show(fm, "fragment_create_todo");
+                CreateOrEditItemDialogFragment createOrEditItemDialogFragment = CreateOrEditItemDialogFragment.newInstance();     // new todo item
+                createOrEditItemDialogFragment.show(fm, "fragment_create_todo");
             }
         });
 

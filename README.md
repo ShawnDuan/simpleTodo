@@ -17,16 +17,19 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 * [X] Persist the todo items ~~[into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite)~~ [into Realm](https://realm.io/docs/java/latest/) instead of a text file
-* [ ] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
+* [X] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
 * [ ] Add support for completion due dates for todo items (and display within listview item)
-* [ ] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
+* [X] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
 * [ ] Add support for selecting the priority of each todo item (and display in listview item)
-* [ ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
+* [X] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
 The following **additional** features are implemented:
 
-* [X] Use Realm database to persist todo items.
+* [X] Use **Realm** database to persist todo items.
 * [X] Replace ListView with RecyclerView.
+* [X] Add support for selecting estimated time needed for this task.
+* [X] Floating action button for adding new todo item.
+* [X] Reuse the same DialogFragment for both creating and editing item.
 
 ## Video Walkthrough 
 
