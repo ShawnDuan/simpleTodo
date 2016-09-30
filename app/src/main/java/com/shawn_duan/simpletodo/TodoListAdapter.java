@@ -2,6 +2,7 @@ package com.shawn_duan.simpletodo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,11 +74,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    Intent intent = new Intent(mActivity, EditActivity.class);
+                    long timestamp = mTodoItemSet.get(position).getTimestamp();
 
-                    intent.putExtra("position", position);
-                    intent.putExtra("itemTimestamp", mTodoItemSet.get(position).getTimestamp());
-                    mActivity.startActivityForResult(intent, mActivity.REQUEST_CODE);
+                    FragmentManager fm = mActivity.getSupportFragmentManager();
+                    CreateItemDialogFragment createItemDialogFragment =
+                            CreateItemDialogFragment.newInstance(position, timestamp);     // edit existing todo item
+                    createItemDialogFragment.show(fm, "fragment_edit_todo");
                 }
             });
 

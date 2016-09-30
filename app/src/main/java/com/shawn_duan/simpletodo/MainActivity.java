@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CreateItemDialogFragment.EditNameDialogListener {
     private final static String TAG = "MainActivity";
     private Realm mRealm;
     private RealmResults<TodoItem> mAllTodoItems;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getSupportFragmentManager();
-                CreateItemDialogFragment createItemDialogFragment = new CreateItemDialogFragment();
+                CreateItemDialogFragment createItemDialogFragment = CreateItemDialogFragment.newInstance();     // new todo item
                 createItemDialogFragment.show(fm, "fragment_create_todo");
             }
         });
@@ -66,24 +66,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            int position = data.getExtras().getInt("position");
-            long timestamp = data.getExtras().getLong("timestamp");
-            final TodoItem todoItem = mRealm.where(TodoItem.class).equalTo("timestamp", timestamp).findFirst();
-            updateItem(position, todoItem);
-        }
+    public void onFinishEditDialog(int position) {
+//        if (position == -1) {
+//            mItemsAdapter.notifyItemChanged(mAllTodoItems.size());
+//        } else {
+//            mItemsAdapter.notifyItemChanged(position);
+//        }
+        mItemsAdapter.notifyDataSetChanged();
     }
 
-    private void updateItem(int position, final TodoItem item) {
-        Log.d(TAG, "position/content:" + position + "/" + item);
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.copyToRealmOrUpdate(item);
-            }
-        });
-        mItemsAdapter.notifyItemChanged(position);
-    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+//            int position = data.getExtras().getInt("position");
+//            long timestamp = data.getExtras().getLong("timestamp");
+//            final TodoItem todoItem = mRealm.where(TodoItem.class).equalTo("timestamp", timestamp).findFirst();
+//            updateItem(position, todoItem);
+//        }
+//    }
+//
+//    private void updateItem(int position, final TodoItem item) {
+//        Log.d(TAG, "position/content:" + position + "/" + item);
+//        mRealm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                realm.copyToRealmOrUpdate(item);
+//            }
+//        });
+//        mItemsAdapter.notifyItemChanged(position);
+//    }
 }
