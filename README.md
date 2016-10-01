@@ -25,7 +25,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [X] **Use Realm** database to persist todo items.**
+* [X] **Use Realm database to persist todo items.**
 * [X] Replace ListView with RecyclerView.
 * [X] Add support for selecting estimated time needed for this task.
 * [X] Floating action button for adding new todo item.
