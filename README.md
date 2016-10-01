@@ -32,7 +32,9 @@ The following **additional** features are implemented:
 * [X] Reuse the same DialogFragment for both creating and editing item.
 * [X] Add field to indicate if an item is done.
 
-* [X] **Support for automatically picking up something to do, by given the free time you have now. **
+* [X] **Support for automatically picking up something in the time range to do, by given the free time you have now. **
+* [X] **ArchiveActivity for displaying finished items**
+* [X] When long click on an item, show a dialog for choosing "Delete" or "Complete" this thing.
 
 ## Video Walkthrough 
 
