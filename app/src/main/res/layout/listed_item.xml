@@ -15,11 +15,11 @@
         android:textSize="20sp"
         android:maxLines="1"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/itemTimestamp"
-        android:layout_toStartOf="@+id/itemTimestamp"/>
+        android:layout_toLeftOf="@+id/itemEstimatedTime"
+        android:layout_toStartOf="@+id/itemEstimatedTime"/>
 
     <TextView
-        android:id="@+id/itemTimestamp"
+        android:id="@+id/itemEstimatedTime"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="right|center_vertical"

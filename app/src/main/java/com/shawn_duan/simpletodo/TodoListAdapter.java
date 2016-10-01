@@ -42,10 +42,27 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         TextView title = (TextView) holder.itemView.findViewById(R.id.itemTitle);
-        TextView timestamp = (TextView) holder.itemView.findViewById(R.id.itemTimestamp);
+        TextView estimatedTime = (TextView) holder.itemView.findViewById(R.id.itemEstimatedTime);
         TodoItem item = mTodoItemSet.get(position);
         title.setText(item.getTitle());
-        timestamp.setText(convertTime(item.getTimestamp()));
+
+        String[] timeLengthForChoose = new String[]{"Select one...", "15 mins", "30 mins", "1 hour", "2 hours"};
+        switch (item.getEstimateTimeInMin()) {
+            case 0:
+                estimatedTime.setText("");
+                break;
+            case 15:
+                estimatedTime.setText(timeLengthForChoose[1]);
+                break;
+            case 30:
+                estimatedTime.setText(timeLengthForChoose[2]);
+                break;
+            case 60:
+                estimatedTime.setText(timeLengthForChoose[3]);
+                break;
+            case 120:
+                estimatedTime.setText(timeLengthForChoose[4]);
+        }
     }
 
     @Override

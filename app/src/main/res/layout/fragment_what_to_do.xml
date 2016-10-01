@@ -7,18 +7,11 @@
               android:padding="@dimen/activity_vertical_margin">
 
     <TextView
-        android:text="Got time? Great! Let's find something todo!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:textSize="18sp"/>
-
-    <TextView
         android:text="How long do you have?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@style/MyFormTextViewStyle"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/textView2"/>
 
     <NumberPicker
