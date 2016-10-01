@@ -108,14 +108,16 @@ public class WhatTodoFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.setTitle("Find Something To Do");
+        return dialog;
     }
 
     // TODO: more comprehensive logic can be performed here.
     private TodoItem getItemBasedOnEstimatedTime(int givenTime) {
         RealmResults<TodoItem> availableItems = mRealm.where(TodoItem.class)
                 .equalTo("isDone", false)
-                .lessThanOrEqualTo("estimateTimeInMin", givenTime)
+                .between("estimateTimeInMin", 1, givenTime)
                 .findAll().sort("estimateTimeInMin", Sort.DESCENDING);
         TodoItem item = availableItems.where().findFirst();
         return item;

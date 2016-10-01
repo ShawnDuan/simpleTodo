@@ -30,6 +30,9 @@ The following **additional** features are implemented:
 * [X] Add support for selecting estimated time needed for this task.
 * [X] Floating action button for adding new todo item.
 * [X] Reuse the same DialogFragment for both creating and editing item.
+* [X] Add field to indicate if an item is done.
+
+* [X] **Support for automatically picking up something to do, by given the free time you have now. **
 
 ## Video Walkthrough 
 

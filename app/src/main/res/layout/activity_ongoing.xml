@@ -25,17 +25,14 @@
             android:text="Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:theme="@style/MyFormTextViewStyle"/>
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:textSize="16sp"
-            android:padding="5dp"
-            android:background="@drawable/bg_uneditable_rectangle"
+            android:theme="@style/MyFormUneditableEditTextStyle"
             android:layout_marginBottom="20dp"
             android:layout_below="@id/tvTT"/>
 
@@ -44,8 +41,7 @@
             android:text="Content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:theme="@style/MyFormTextViewStyle"
             android:layout_below="@id/tvTitle"/>
 
         <TextView
@@ -53,9 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="5"
-            android:textSize="16sp"
-            android:padding="5dp"
-            android:background="@drawable/bg_uneditable_rectangle"
+            android:theme="@style/MyFormUneditableEditTextStyle"
             android:layout_marginBottom="20dp"
             android:layout_below="@id/tvCC"/>
 
@@ -72,17 +66,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Estimated Time"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:theme="@style/MyFormTextViewStyle"/>
 
             <TextView
                 android:id="@+id/tvTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
-                android:padding="5dp"
-                android:background="@drawable/bg_uneditable_rectangle"
+                android:theme="@style/MyFormUneditableEditTextStyle"
                 android:gravity="center"/>
         </LinearLayout>
 
