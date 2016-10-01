@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         app:theme="@style/ToolBarStyle"
         android:elevation="4dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/MyToolbarPopupStyle"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="normal"
-        app:srcCompat="@drawable/plus"
+        app:srcCompat="@drawable/ic_add_white_48dp"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

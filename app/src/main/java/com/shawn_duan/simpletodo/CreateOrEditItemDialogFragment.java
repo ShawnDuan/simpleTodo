@@ -84,7 +84,7 @@ public class CreateOrEditItemDialogFragment extends DialogFragment implements Te
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create_item, container);
+        View view = inflater.inflate(R.layout.fragment_edit_item, container);
         etTitle = (EditText) view.findViewById(R.id.etTitle);
         etContent = (EditText) view.findViewById(R.id.etContent);
         btSave = (Button) view.findViewById(R.id.btSave);

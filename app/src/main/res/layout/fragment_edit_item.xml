@@ -80,7 +80,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-
             android:id="@+id/btCancle"
             android:background="@color/customize_Verylight"
             android:layout_weight="1"/>

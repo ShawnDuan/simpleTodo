@@ -32,5 +32,18 @@
         <item name="android:background">@color/customize_Primary</item>
     </style>
 
+    <style name="MyToolbarPopupStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/white_50_percent</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--<style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
+        <!--<item name="android:textColor">@android:color/black</item>-->
+        <!--<item name="android:background">@android:color/background_light</item>-->
+        <!--<item name="android:textSize">21sp</item>-->
+        <!--<item name="android:textStyle">italic</item>-->
+    <!--</style>-->
+
+
 
 </resources>

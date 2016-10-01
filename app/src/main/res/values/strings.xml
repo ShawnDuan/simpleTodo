@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WxTodo</string>
+    <string name="what_to_do_title">Pick something to do...</string>
 </resources>
