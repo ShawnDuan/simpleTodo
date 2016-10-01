@@ -36,6 +36,7 @@ public class ItemOngoingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ongoing);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Working On Item...");
 
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvContent = (TextView) findViewById(R.id.tvContent);

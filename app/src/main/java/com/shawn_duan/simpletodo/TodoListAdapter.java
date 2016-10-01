@@ -19,6 +19,7 @@ import java.util.Date;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by sduan on 9/27/16.
@@ -34,7 +35,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
         if (mActivity instanceof ArchivedActivity) {
             mIsArchived = true;
         }
-        mTodoItemSet = todoItemSet.sort(sortBy);
+        mTodoItemSet = todoItemSet.sort(sortBy, Sort.DESCENDING);
     }
 
     @Override
@@ -108,14 +109,11 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
                     @Override
                     public boolean onLongClick(View view) {
                         int position = getAdapterPosition();
-                        final TodoItem item = mTodoItemSet.get(position);
-                        Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
-                            @Override
-                            public void execute(Realm realm) {
-                                item.deleteFromRealm(); // Delete and remove object directly
-                            }
-                        });
-                        notifyItemRemoved(position);
+                        long timestamp = mTodoItemSet.get(position).getTimestamp();
+                        FragmentManager fm = mActivity.getSupportFragmentManager();
+                        DeleteOrCompleteDialogFragment deleteOrCompleteDialogFragment =
+                                DeleteOrCompleteDialogFragment.newInstance(position, timestamp);
+                        deleteOrCompleteDialogFragment.show(fm, "fragment_delete_or_complete");
                         return true;
                     }
                 });
