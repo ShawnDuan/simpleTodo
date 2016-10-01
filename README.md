@@ -25,14 +25,14 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [X] Use **Realm** database to persist todo items.
+* [X] **Use Realm** database to persist todo items.**
 * [X] Replace ListView with RecyclerView.
 * [X] Add support for selecting estimated time needed for this task.
 * [X] Floating action button for adding new todo item.
 * [X] Reuse the same DialogFragment for both creating and editing item.
 * [X] Add field to indicate if an item is done.
 
-* [X] **Support for automatically picking up something in the time range to do, by given the free time you have now. **
+* [X] **Support for automatically picking up something in the time range to do, by given the free time you have now.**
 * [X] **ArchiveActivity for displaying finished items**
 * [X] When long click on an item, show a dialog for choosing "Delete" or "Complete" this thing.
 
