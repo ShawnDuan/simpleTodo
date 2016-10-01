@@ -35,7 +35,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
         if (mActivity instanceof ArchivedActivity) {
             mIsArchived = true;
         }
-        mTodoItemSet = todoItemSet.sort(sortBy, Sort.DESCENDING);
+        mTodoItemSet = todoItemSet.sort(sortBy);
     }
 
     @Override
