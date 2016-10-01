@@ -41,7 +41,7 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <div>
-    <img src='https://raw.githubusercontent.com/shawnduan/simpleTodo/master/art/demo.gif' style='border: #f1f1f1 solid 1px'/>
+    <img src='https://raw.githubusercontent.com/shawnduan/simpleTodo/master/art/todo_demo_emulator.gif' style='border: #f1f1f1 solid 1px'/>
 </div>
 
 ## Notes
