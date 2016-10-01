@@ -2,6 +2,7 @@ package com.shawn_duan.simpletodo;
 
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +25,15 @@ import io.realm.RealmResults;
  */
 
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemViewHolder> {
-    private MainActivity mActivity;
+    private AppCompatActivity mActivity;
     private OrderedRealmCollection<TodoItem> mTodoItemSet;
+    private boolean mIsArchived;
 
     public TodoListAdapter(Activity activity, RealmResults<TodoItem> todoItemSet, String sortBy) {
-        mActivity = (MainActivity) activity;
+        mActivity = (AppCompatActivity) activity;
+        if (mActivity instanceof ArchivedActivity) {
+            mIsArchived = true;
+        }
         mTodoItemSet = todoItemSet.sort(sortBy);
     }
 
@@ -82,38 +87,39 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ItemVi
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
-        private AdapterView.OnItemClickListener onItemClickListener;
         public ItemViewHolder(View itemView) {
             super(itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    long timestamp = mTodoItemSet.get(position).getTimestamp();
+            if (!mIsArchived) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int position = getAdapterPosition();
+                        long timestamp = mTodoItemSet.get(position).getTimestamp();
 
-                    FragmentManager fm = mActivity.getSupportFragmentManager();
-                    CreateOrEditItemDialogFragment createOrEditItemDialogFragment =
-                            CreateOrEditItemDialogFragment.newInstance(position, timestamp);     // edit existing todo item
-                    createOrEditItemDialogFragment.show(fm, "fragment_edit_todo");
-                }
-            });
+                        FragmentManager fm = mActivity.getSupportFragmentManager();
+                        CreateOrEditItemDialogFragment createOrEditItemDialogFragment =
+                                CreateOrEditItemDialogFragment.newInstance(position, timestamp);     // edit existing todo item
+                        createOrEditItemDialogFragment.show(fm, "fragment_edit_todo");
+                    }
+                });
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    int position = getAdapterPosition();
-                    final TodoItem item = mTodoItemSet.get(position);
-                    Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            item.deleteFromRealm(); // Delete and remove object directly
-                        }
-                    });
-                    notifyItemRemoved(position);
-                    return true;
-                }
-            });
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        int position = getAdapterPosition();
+                        final TodoItem item = mTodoItemSet.get(position);
+                        Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                item.deleteFromRealm(); // Delete and remove object directly
+                            }
+                        });
+                        notifyItemRemoved(position);
+                        return true;
+                    }
+                });
+            }
         }
     }
 

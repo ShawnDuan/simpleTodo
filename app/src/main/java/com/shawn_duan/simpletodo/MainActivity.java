@@ -72,7 +72,9 @@ public class MainActivity extends AppCompatActivity implements CreateOrEditItemD
                 WhatTodoFragment whatTodoFragment = new WhatTodoFragment();
                 whatTodoFragment.show(fm, "fragment_what_to_do");
                 return true;
-
+            case R.id.action_archive:
+                Intent intent = new Intent(MainActivity.this, ArchivedActivity.class);
+                MainActivity.this.startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
