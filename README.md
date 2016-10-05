@@ -1,6 +1,6 @@
-# Pre-work - *SimpleTodo*
+# Pre-work - *WxTodo*
 
-**SimpleTodo** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
+**WxTodo** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
 Submitted by: **Shawn Duan**
 
@@ -41,7 +41,7 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <div>
-    <img src='https://raw.githubusercontent.com/shawnduan/simpleTodo/master/art/todo_demo.gif' style='border: #f1f1f1 solid 1px'/>
+    <img src='https://raw.githubusercontent.com/shawnduan/wxTodo/master/art/todo_demo.gif' style='border: #f1f1f1 solid 1px'/>
 </div>
 
 ## Notes

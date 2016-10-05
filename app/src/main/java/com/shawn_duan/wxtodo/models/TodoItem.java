@@ -1,4 +1,4 @@
-package com.shawn_duan.simpletodo.models;
+package com.shawn_duan.wxtodo.models;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

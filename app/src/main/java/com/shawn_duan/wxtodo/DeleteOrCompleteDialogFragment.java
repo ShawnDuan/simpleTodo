@@ -1,4 +1,4 @@
-package com.shawn_duan.simpletodo;
+package com.shawn_duan.wxtodo;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.NumberPicker;
 
-import com.shawn_duan.simpletodo.models.TodoItem;
+import com.shawn_duan.wxtodo.models.TodoItem;
 
 import io.realm.Realm;
 

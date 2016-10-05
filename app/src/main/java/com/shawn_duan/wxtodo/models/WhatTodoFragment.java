@@ -1,4 +1,4 @@
-package com.shawn_duan.simpletodo.models;
+package com.shawn_duan.wxtodo.models;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
-import com.shawn_duan.simpletodo.ItemOngoingActivity;
-import com.shawn_duan.simpletodo.R;
+import com.shawn_duan.wxtodo.ItemOngoingActivity;
+import com.shawn_duan.wxtodo.R;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

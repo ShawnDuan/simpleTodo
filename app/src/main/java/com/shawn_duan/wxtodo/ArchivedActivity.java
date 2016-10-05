@@ -1,8 +1,7 @@
-package com.shawn_duan.simpletodo;
+package com.shawn_duan.wxtodo;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.shawn_duan.simpletodo.models.TodoItem;
+import com.shawn_duan.wxtodo.models.TodoItem;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

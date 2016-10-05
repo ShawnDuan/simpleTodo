@@ -1,4 +1,4 @@
-package com.shawn_duan.simpletodo;
+package com.shawn_duan.wxtodo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

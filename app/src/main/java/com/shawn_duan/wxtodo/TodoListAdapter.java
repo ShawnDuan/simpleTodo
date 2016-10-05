@@ -1,4 +1,4 @@
-package com.shawn_duan.simpletodo;
+package com.shawn_duan.wxtodo;
 
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
@@ -7,19 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.shawn_duan.simpletodo.models.TodoItem;
+import com.shawn_duan.wxtodo.models.TodoItem;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.realm.OrderedRealmCollection;
-import io.realm.Realm;
 import io.realm.RealmResults;
-import io.realm.Sort;
 
 /**
  * Created by sduan on 9/27/16.

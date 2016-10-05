@@ -1,4 +1,4 @@
-package com.shawn_duan.simpletodo;
+package com.shawn_duan.wxtodo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.shawn_duan.simpletodo.models.TodoItem;
-import com.shawn_duan.simpletodo.models.WhatTodoFragment;
+import com.shawn_duan.wxtodo.models.TodoItem;
+import com.shawn_duan.wxtodo.models.WhatTodoFragment;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

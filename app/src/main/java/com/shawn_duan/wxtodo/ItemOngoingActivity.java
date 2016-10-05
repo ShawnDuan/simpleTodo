@@ -1,4 +1,4 @@
-package com.shawn_duan.simpletodo;
+package com.shawn_duan.wxtodo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shawn_duan.simpletodo.models.TodoItem;
+import com.shawn_duan.wxtodo.models.TodoItem;
 
 import io.realm.Realm;
 
